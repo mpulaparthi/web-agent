@@ -28,6 +28,17 @@ async def browse_web(task: str):
     """
     print(f"Browser Tool called with task: {task}")
     
+    # Check for Invesco Vision credentials
+    vision_email = os.environ.get("VISION_EMAIL")
+    vision_password = os.environ.get("VISION_PASSWORD")
+    
+    # If the task involves vision.invesco.com and credentials are provided, append them
+    # This is a basic way to provide credentials to the agent.
+    # In a production environment, you might want more sophisticated secret management.
+    if vision_email and vision_password and ("vision.invesco.com" in task or "Invesco" in task):
+        print("Injecting Invesco Vision credentials into task context.")
+        task += f"\n\nIf you need to log in to vision.invesco.com, use the following credentials:\nEmail: {vision_email}\nPassword: {vision_password}\nDo not output the password in your final response."
+
     # Get AWS region from environment or default
     region = os.environ.get("AWS_REGION", "us-west-2")
     
