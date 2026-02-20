@@ -1,0 +1,7 @@
+langchain-aws
+langgraph
+browser-use
+playwright
+boto3
+bedrock-agentcore
+nest_asyncio
